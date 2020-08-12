@@ -1,50 +1,29 @@
 import React from "react";
-
-class LoginForm extends React.Component {
+class TwitterMessage extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      username: '',
-      password: ''
+      message: ''
     };
   }
 
   handleChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      message: event.target.value
     })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
-
-    if (!this.state.username || !this.state.password) return
-
-    this.props.handleLogin(this.state)
-  }
-
   render() {
+    let charNumber = this.props.maxChars - this.state.message.length;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>
-            Username
-            <input id="username" name="username" type="text" onChange={this.handleChange} value={this.state.username}/>
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input id="password" name="password" type="password" onChange={this.handleChange} value={this.state.password}/>
-          </label>
-        </div>
-        <div>
-          <button type="submit">Log in</button>
-        </div>
-      </form>
+      <div>
+        <strong>Your message:</strong>
+        <input type="text" onChange={this.handleChange} value={this.state.message}/>
+        {charNumber}
+      </div>
     );
   }
 }
 
-export default LoginForm;
+export default TwitterMessage;
